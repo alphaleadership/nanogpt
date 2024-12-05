@@ -2,11 +2,11 @@
 Sample from a trained model
 """
 import os
-import pickle
 from contextlib import nullcontext
 import torch
 import tiktoken
 from model import GPTConfig, GPT
+import fickling
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
@@ -61,7 +61,7 @@ if init_from == 'resume' and 'config' in checkpoint and 'dataset' in checkpoint[
 if load_meta:
     print(f"Loading meta from {meta_path}...")
     with open(meta_path, 'rb') as f:
-        meta = pickle.load(f)
+        meta = fickling.load(f)
     # TODO want to make this more general to arbitrary encoder/decoder schemes
     stoi, itos = meta['stoi'], meta['itos']
     encode = lambda s: [stoi[c] for c in s]
